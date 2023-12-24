@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+{% block guideContent %}
+    <div>
+        <main class="container mx-auto max-w-4xl">
+            <h2>Guide</h2>
+            <div id="crbn"></div>
+            <h3>Kaynak Kullanımları #GET</h3>
+            <pre><code class="language-js">curl -X GET "http://localhost:8000/posts/1"
+</code></pre>
+            <p>👇 <em>Output</em></p>
+            <pre><code class="language-js">{
+  id: 1,
+  title: '...',
+  body: '...',
+  userId: 1
+}
+</code></pre>
+            <h3>Tüm Kaynakları Listeleme #GET</h3>
+            <pre><code class="language-js">curl -X GET "http://localhost:8000/posts"
+</code></pre>
+            <p>👇 <em>Output</em></p>
+            <pre><code class="language-js">[
+  { id: 1, title: '...' /* ... */ },
+  { id: 2, title: '...' /* ... */ },
+  { id: 3, title: '...' /* ... */ },
+  /* ... */
+  { id: 100, title: '...' /* ... */ },
+];
+</code></pre>
+            <h3>Kaynak Oluşturma #POST</h3>
+            <pre><code class="language-js">curl -X POST -H "Content-Type: application/json" -d '{"title":"title", "body":"body","userId":1}' http://localhost:8000/posts
+</code></pre>
+            <p>👇 <em>Output</em></p>
+            <pre><code class="language-js">{
+  "durum": 'basarili',
+  "mesaj": 'Başarıyla eklendi.',
+}
+</code></pre>
+            <h3>Kaynak Güncelleme #PUT</h3>
+            <pre><code class="language-js">curl -X PUT -H "Content-Type: application/json" -d '{"title":"title", "body":"body","userId":1}' http://localhost:8000/posts/{id}
+</code></pre>
+            <p>👇 <em>Output</em></p>
+            <pre><code class="language-js">{
+  "durum": "basarili",
+  "mesaj": "Başarıyla güncellendi."
+}
+</code></pre>
+            <h3>Kaynak Silme #DELETE</h3>
+            <pre><code class="language-js">curl -X DELETE http://localhost:8000/posts/{id}
+</code></pre>
+            <h3>Kaynak Filtreleme</h3>
+            <pre><code class="language-js">curl -X GET http://localhost:8000/posts/{id}/users
+</code></pre>
+
+            <p>Mevcut kaynaklar:</p>
+            <ul>
+                <li><a href="/users/1/posts">/users/1/posts</a></li>
+                <li><a href="/users/1/comments">/users/1/comments</a></li>
+                <li><a href="/posts/1/comments">/posts/1/comments</a></li>
+                <li><a href="/posts/1/users">/posts/1/users</a></li>
+                <li><a href="/comments/1/users">/comments/1/users</a></li>
+                <li><a href="/comments/1/posts">/comments/1/posts</a></li>
+            </ul>
+        </main>
+    </div>
+{% endblock %}
